@@ -3,8 +3,11 @@ import express from "express";
 import dotenv from "dotenv";
 import { chats } from "./data/data.js";
 import cors from "cors";
+import connectDB from "./config/db.js";
+import colors from "colors";
 
 dotenv.config();
+connectDB();
 const app = express();
 
 // Setting cors for all sites
@@ -20,4 +23,4 @@ app.get("/api/chat", (req, res) => {
   res.send(chats);
 });
 
-app.listen(PORT, console.log(`Server is working ${PORT}`));
+app.listen(PORT, console.log(`Server is working ${PORT}`.yellow.bold));

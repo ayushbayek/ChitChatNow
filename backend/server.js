@@ -5,7 +5,9 @@ import { chats } from "./data/data.js";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import colors from "colors";
-import router from "./routes/userRoutes.js";
+// 👇️ can directly rename when importing (because default export)
+import userRoutes from "./routes/userRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -24,10 +26,11 @@ app.get("/", (req, res) => {
   res.send("API is running successfully");
 });
 
-app.use("/api/user", router);
+// user routes
+app.use("/api/user", userRoutes);
 
-// temp chat api
-app.get("/api/chat", (req, res) => res.send(chats));
+//chat routes
+app.use("/api/chat", chatRoutes);
 
 // Error handler
 app.use(notFound);
